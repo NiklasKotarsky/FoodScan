@@ -1,0 +1,88 @@
+#:kivy 1.0.9
+
+<MyScreenManager>:
+    StartPage:
+        name: "start"
+    SettingsPage:
+        name: "settings"
+    PhotoPage:
+        name: "photo"
+
+<StartPage>:
+    
+    Label:
+        text: "#1 Start Page"
+        
+    BoxLayout:
+        size_hint_y: 0.1
+
+        Button:
+            text: "Take photo"
+            on_release:
+                app.root.current = "photo"
+            
+        Button:
+            text: "add ingredients"
+            on_release:
+                app.root.current = "settings"
+
+<PhotoPage>:
+    
+    Label:
+        text: "Photo page"
+        
+    BoxLayout:
+        size_hint_y: 1
+        orientation: "vertical"
+
+        CameraClick:
+            size_hint_y: 8
+        Button:
+            size_hint_y: 2
+            text: "return"
+            on_release:
+                app.root.current = "start"
+
+<CameraClick>:
+    Camera:
+        id: camera
+        resolution: (1080, 900)
+        play: True
+   
+    Button:
+        text: 'Capture'
+        size_hint_y: None
+        on_press: root.capture()
+
+
+
+<SettingsPage>:
+    
+    BoxLayout: 
+        orientation: "vertical"
+        
+        Label:
+            text: "Add ingredients"
+
+        AnswerInput:
+
+        Button:
+            text: "return"
+            on_release:
+                app.root.current = "start"
+
+<AddIngredientButton>:
+    text: "Add"
+    size_hint_x: 25
+
+
+<AnswerInput>:
+    ingredient: input_ingredient.text
+    orientation: "horizontal"
+    size_hint_y: None
+    TextInput:
+        id:input_ingredient
+        size_hint_x: 20
+    AddIngredientButton:
+
+
